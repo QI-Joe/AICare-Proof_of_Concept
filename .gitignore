@@ -1,0 +1,9 @@
+__pycache__/
+ASR_model/
+**/*venv*/
+log/
+markdown/
+test_field/
+realtime_results.txt
+*.pyc
+*.ipynb
