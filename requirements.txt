@@ -20,6 +20,7 @@ pyaudio>=0.2.11
 
 # Standard libraries (usually included with Python, but listed for completeness)
 # sudo apt install portaudio19-dev / erlang / rabbitmq-server required
+# brew install ffmpeg 
 # https://stackoverflow.com/questions/73268630/error-could-not-build-wheels-for-pyaudio-which-is-required-to-install-pyprojec 
 # for audio problem
 

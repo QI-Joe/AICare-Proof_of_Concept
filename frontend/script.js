@@ -95,6 +95,8 @@ btnBatchTest.addEventListener('click', async () => {
                 </div>`;
             });
             areaBatchTest.innerHTML = html;
+        } else if (result.status === 'failed') {
+            areaBatchTest.innerHTML = `<h3>批量测试结果</h3><p class="status" style="color: red;">❌ 测试失败<br><br>错误信息:<br>${result.error}</p>`;
         } else {
             setTimeout(checkResult, 2000);
         }

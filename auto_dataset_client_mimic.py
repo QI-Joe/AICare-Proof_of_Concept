@@ -6,7 +6,6 @@ import websockets
 import json
 import time
 from datasets import load_dataset
-from datasets.features._torchcodec import AudioDecoder
 import base64
 import pyaudio
 import numpy as np
@@ -22,8 +21,8 @@ async def single_request_test(sample):
     try:
         async with websockets.connect(uri) as websocket:
             # 获取测试数据
-            audio_decoder: AudioDecoder = sample['audio']
-            audio_array, audio_sample_rate = audio_decoder['array'].astype(np.float32), audio_decoder['sampling_rate']
+            audio_data = sample['audio']
+            audio_array, audio_sample_rate = audio_data['array'].astype(np.float32), audio_data['sampling_rate']
             print(audio_sample_rate, "audio sampling rate")
             
             # 发送测试音频数据
@@ -58,7 +57,7 @@ async def concurrent_requests_test(data):
             async with websockets.connect(uri) as websocket:
                 # Extract data from the sample WITHOUT modifying original
                 client_id: str = sample['id']
-                raw_audio: AudioDecoder = sample['audio']
+                raw_audio = sample['audio']
                 audio_array, audio_sample_rate = raw_audio['array'].astype(np.float32), raw_audio['sampling_rate']
                 
                 # Create a NEW clean dictionary for JSON serialization
@@ -125,8 +124,8 @@ async def run_batch_test_for_api(num_samples: int = 10):
         try:
             async with websockets.connect(uri) as websocket:
                 client_id = sample['id']
-                raw_audio = sample['audio']
-                audio_array, audio_sample_rate = raw_audio['array'].astype(np.float32), raw_audio['sampling_rate']
+                audio_data = sample['audio']
+                audio_array, audio_sample_rate = audio_data['array'].astype(np.float32), audio_data['sampling_rate']
                 
                 request_data = {
                     "action": "asr",
