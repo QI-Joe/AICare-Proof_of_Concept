@@ -1,4 +1,7 @@
-from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor, WhisperProcessor, WhisperForConditionalGeneration
+from transformers import (
+    Wav2Vec2ForCTC, Wav2Vec2Processor, 
+    WhisperProcessor, WhisperForConditionalGeneration,
+    AutoModel, AutoTokenizer)
 import torch
 import os
 from typing import Optional, Any, Tuple, List, Dict
