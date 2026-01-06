@@ -11,7 +11,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("StabilityTest")
 
-async def connection_heartbeat_test(duration_minutes: int = 60):
+async def connection_heartbeat_test(duration_minutes: int = 480):
     """Test connection stays alive with heartbeat"""
     logger.info(f"Starting {duration_minutes}-minute connection stability test")
     
@@ -26,7 +26,7 @@ async def connection_heartbeat_test(duration_minutes: int = 60):
         iteration = 0
         
         while asyncio.get_event_loop().time() < end_time:
-            await asyncio.sleep(10)
+            await asyncio.sleep(50)
             iteration += 1
             
             if connection.is_closed:

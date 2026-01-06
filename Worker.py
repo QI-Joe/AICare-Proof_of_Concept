@@ -24,7 +24,7 @@ class Worker:
         logger.info("ASR Model Status:")
         for key, value in status.items():
             logger.info(f"  {key}: {value}")
-        logger.info("=" * 60, "\n")
+        logger.info("=" * 60 + "\n")
     
     async def initial_connection(self):
         self.connection = await aio_pika.connect_robust(
@@ -50,7 +50,7 @@ class Worker:
         for key, queued in self.queue_dict.items():
             purged_count = await queued.purge()
             logger.info(f"queue {key} purged out {purged_count} old messages")
-            await queued.bind(self.channel.default_exchange, routing_key=key)
+            # No need to bind to default exchange - it auto-routes by queue name
     
     def asr_message_process(self, data:Dict):
         audio_data = np.frombuffer(

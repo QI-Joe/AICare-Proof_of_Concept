@@ -7,3 +7,4 @@ test_field/
 realtime_results.txt
 *.pyc
 *.ipynb
+test_script/
