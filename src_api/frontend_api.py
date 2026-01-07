@@ -5,8 +5,8 @@ from pydantic import BaseModel
 import asyncio
 import uuid
 import subprocess
-import os
 import json
+from src_testset.auto_dataset_client_mimic import run_batch_test_for_api
 
 app = FastAPI()
 
@@ -104,9 +104,7 @@ async def get_batch_test_status(task_id: str):
 
 async def run_batch_test(task_id: str, num_samples: int):
     """运行批量测试任务"""
-    # 导入测试函数
-    from auto_dataset_client_mimic import run_batch_test_for_api
-    
+    # 导入测试函数    
     try:
         results = await run_batch_test_for_api(num_samples)
         tasks[task_id]["status"] = "completed"

@@ -2,11 +2,12 @@ import aio_pika
 import asyncio
 import uuid
 import json
-import base64, log
+import base64
+from utils.log import get_logger
 import numpy as np
 from typing import Optional, Dict, Callable, Any
 
-logger = log.get_logger()
+logger = get_logger()
 
 class RPClient:
     def __init__(self):
@@ -88,7 +89,7 @@ class RPClient:
                 body = json.dumps(request_data).encode(),
                 content_type='application/json',
                 correlation_id=correlation_id,
-                reply_to=self.callback_queue,
+                reply_to=self.callback_queue.name,
             ),
             routing_key='llm_queue',
         )
@@ -100,7 +101,7 @@ class RPClient:
             return result
         except asyncio.TimeoutError:
             self.futures.pop(correlation_id, None)
-            raise TimeoutError(f"ASR request timed out after {timeout}s")
+            raise TimeoutError(f"LLM request timed out after {timeout}s")
         
     async def close(self):
         """Close connection"""

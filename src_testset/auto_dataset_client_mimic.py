@@ -1,10 +1,11 @@
 import asyncio
 from datasets import load_dataset
 import numpy as np
-from RPC_client import RPClient
+from src_backend.RPC_client import RPClient
 import time
 
 test_dataset = load_dataset("hf-internal-testing/librispeech_asr_dummy", "clean", split="validation")
+text_dataset = ...
 
 async def single_request_test(client: RPClient, sample):
     """Test single request"""

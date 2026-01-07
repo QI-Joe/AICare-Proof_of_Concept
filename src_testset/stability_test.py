@@ -2,7 +2,7 @@ import asyncio
 import aio_pika
 import logging
 from datetime import datetime
-from RPC_client import RPClient
+from src_backend.RPC_client import RPClient
 import numpy as np
 
 logging.basicConfig(
